@@ -35,16 +35,8 @@ impl Block {
             nonce: 0u64,
         };
 
-        let pow = ProofOfWork::new(&b);
-        let hardwork = pow.run();
-        b.nonce = hardwork.0;
-        b.hash  = hardwork.1;
-        // b.hash = digest(&SHA256, {
-        //     let mut hashstr: String = "".to_string();
-        //     write!(&mut hashstr, "{}{}{:?}", b.time_stamp, b.data, b.prev_block_hash).unwrap();
-        //     hashstr
-        // }.as_ref()).as_ref().to_vec();
-        
+        run_pow(&mut b);
+
         b
     }
 }
@@ -52,8 +44,9 @@ impl Block {
 impl fmt::Display for Block {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, 
-               "Block {:?}\n\tTimeStamp: {}\n\tData: {}\n\tPrevBlock: {:?}\n\n",
-               self.hash.to_base58(), self.time_stamp, self.data, self.prev_block_hash.to_base58()
+               "Block {:?}\n\tTimeStamp: {}\n\tData: {}\n\tPrevBlock: {:?}\n\tNonce: {}\n\n",
+               self.hash.to_base58(), self.time_stamp, self.data, self.prev_block_hash.to_base58(),
+               self.nonce
             )
     }
 }

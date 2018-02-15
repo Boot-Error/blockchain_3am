@@ -1,0 +1,13 @@
+[package]
+name = "blkchain_3am"
+version = "0.1.0"
+authors = ["Boot-Error <booterror99@gmail.com>"]
+
+[dependencies]
+ring = "0.12.1"
+clap = "2.29.4"
+rocksdb = "0.9.1"
+base58 = "*"
+num = "*"
+serde = "1.0"
+serde_derive = "1.0"
